@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Providers\AuthServiceProvider;
 use App\Providers\UserServiceProvider;
 use \Illuminate\Http\Request;
 
@@ -13,14 +12,14 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'password' => 'required',
+            'nonce' => 'required'
         ]);
 
-        $bodyContent = json_decode($request->getContent(), true);
+        $name = $request->input('name');
+        $password = $request->input('password');
+        $nonce = $request->input('nonce');
 
-        $name = $bodyContent['name'];
-        $password = $bodyContent['password'];
-
-        $result = UserServiceProvider::login($name, $password);
+        $result = UserServiceProvider::login($name, $password, $nonce);
 
         return $result;
     }

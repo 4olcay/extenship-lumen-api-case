@@ -15,11 +15,10 @@ class ArticleController extends Controller
             'content' => 'required'
         ]);
 
-        $bodyContent = json_decode($request->getContent(), true);
+        $subject = $request->input('subject');
+        $content = $request->input('content');
 
-        $subject = $bodyContent['subject'];
-        $content = $bodyContent['content'];
-
+        // TODO: First param the user_id fully random for now, need to change with token authentication feature
         $result = ArticleServiceProvider::create(1, $subject, $content);
 
         return $result;
@@ -39,11 +38,10 @@ class ArticleController extends Controller
             'subject' => 'required|max:255'
         ]);
 
-        $bodyContent = json_decode($request->getContent(), true);
+        $subject = $request->input('subject');
 
-        $subject = $bodyContent['subject'];
-
-        $result = ArticleServiceProvider::updateSubject($article_id, $subject);
+        // TODO: First param the user_id fully random for now, need to change with token authentication feature
+        $result = ArticleServiceProvider::updateSubject(1, $article_id, $subject);
 
         return $result;
     }
@@ -55,11 +53,10 @@ class ArticleController extends Controller
             'content' => 'required'
         ]);
 
-        $bodyContent = json_decode($request->getContent(), true);
+        $content = $request->input('content');
 
-        $content = $bodyContent['content'];
-
-        $result = ArticleServiceProvider::updateContent($article_id, $content);
+        // TODO: First param the user_id fully random for now, need to change with token authentication feature
+        $result = ArticleServiceProvider::updateContent(1, $article_id, $content);
 
         return $result;
     }
@@ -82,8 +79,11 @@ class ArticleController extends Controller
     public function remove($article_id, Request $request)
     {
         // TODO: JWT TOKEN AUTHENTICATION
+        
         // TODO: Delete all comments associated with this article
-        $result = ArticleServiceProvider::remove($article_id);
+
+        // TODO: First param the user_id fully random for now, need to change with token authentication feature
+        $result = ArticleServiceProvider::remove(1, $article_id);
         
         return $result;
     }

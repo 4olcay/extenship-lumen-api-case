@@ -40,10 +40,10 @@ class CommentServiceProvider extends ServiceProvider {
         return $result;
     }
 
-    public function updateContent($comment_id, $content)
+    public function updateContent($user_id, $comment_id, $content)
     {
         // TODO: JWT TOKEN AUTHENTICATION
-        $result = Comment::updateContent($comment_id, $content);
+        $result = Comment::updateContent($user_id, $comment_id, $content);
 
         if(!$result) {
             return response()->json([
@@ -55,9 +55,9 @@ class CommentServiceProvider extends ServiceProvider {
         return $result;
     }
 
-    public function remove($comment_id)
+    public function remove($user_id, $comment_id)
     {
-        $result = Comment::remove($comment_id);
+        $result = Comment::remove($user_id, $comment_id);
 
         if(!$result) {
             return response()->json([

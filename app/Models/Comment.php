@@ -26,7 +26,7 @@ class Comment extends Model {
         return $result;
     }
 
-    public function updateContent($comment_id, $content)
+    public function updateContent($user_id, $comment_id, $content)
     {
         $result = Comment::where('id', $comment_id)
                          ->update(['content' => $content]);
@@ -37,7 +37,7 @@ class Comment extends Model {
         return $result;
     }
 
-    public function remove($comment_id)
+    public function remove($user_id, $comment_id)
     {
         $comment = Comment::find($comment_id);
 

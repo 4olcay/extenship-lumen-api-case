@@ -7,9 +7,17 @@ use Illuminate\Support\ServiceProvider;
 
 class UserServiceProvider extends ServiceProvider
 {
-    public function login($name, $password)
+    public function login($name, $password, $nonce)
     {
-        $result = User::login($name, $password);
+        $result = User::login($name, $password, $nonce);
+
+        if(!$result)
+        {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'User not found'
+            ], 404);
+        }
 
         return $result;
     }
@@ -25,19 +33,13 @@ class UserServiceProvider extends ServiceProvider
     {
         $result = User::get($user_id);
 
-        return $result;
-    }
-
-    public function updatePassword($id, $password)
-    {
-        $result = User::updatePassword($id, $password);
-
-        return $result;
-    }
-
-    public function updateMail($id, $email)
-    {
-        $result = User::updateMail($id, $email);
+        if(!$result)
+        {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'User not found'
+            ], 404);
+        }
 
         return $result;
     }
@@ -47,7 +49,12 @@ class UserServiceProvider extends ServiceProvider
         $result = User::list();
 
         if(!$result)
-            return response()->json(['message' => 'No user found'], 404);
+        {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'User not found'
+            ], 404);
+        }
 
         return $result;
     }

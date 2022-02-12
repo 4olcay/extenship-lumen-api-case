@@ -28,9 +28,9 @@ class ArticleServiceProvider extends ServiceProvider {
         return $result;
     }
 
-    public function updateSubject($article_id, $subject)
+    public function updateSubject($user_id, $article_id, $subject)
     {
-        $result = Article::updateSubject($article_id, $subject);
+        $result = Article::updateSubject($user_id, $article_id, $subject);
 
         if(!$result)
         {
@@ -43,9 +43,9 @@ class ArticleServiceProvider extends ServiceProvider {
         return $result;
     }
 
-    public function updateContent($article_id, $content)
+    public function updateContent($user_id, $article_id, $content)
     {
-        $result = Article::updateContent($article_id, $content);
+        $result = Article::updateContent($user_id, $article_id, $content);
 
         if(!$result)
         {
@@ -73,9 +73,9 @@ class ArticleServiceProvider extends ServiceProvider {
         return $result;
     }
 
-    public function remove($article_id)
+    public function remove($user_id, $article_id)
     {
-        $result = Article::remove($article_id);
+        $result = Article::remove($user_id, $article_id);
 
         if(!$result)
         {

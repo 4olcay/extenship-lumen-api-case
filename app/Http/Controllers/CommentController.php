@@ -15,11 +15,10 @@ class CommentController extends Controller
             'content' => 'required'
         ]);
 
-        $bodyContent = json_decode($request->getContent(), true);
+        $article_id = $request->input('article_id');
+        $content = $request->input('content');
 
-        $article_id = $bodyContent['article_id'];
-        $content = $bodyContent['content'];
-
+        // TODO: First param the user_id fully random for now, need to change with token authentication feature
         $result = CommentServiceProvider::create(1, $article_id, $content);
 
         return $result;
@@ -39,11 +38,10 @@ class CommentController extends Controller
             'content' => 'required'
         ]);
 
-        $bodyContent = json_decode($request->getContent(), true);
+        $content = $request->input('content');
 
-        $content = $bodyContent['content'];
-
-        $result = CommentServiceProvider::updateContent($comment_id, $content);
+        // TODO: First param the user_id fully random for now, need to change with token authentication feature
+        $result = CommentServiceProvider::updateContent(1, $comment_id, $content);
 
         return $result;
     }
@@ -52,7 +50,8 @@ class CommentController extends Controller
     {
         // TODO: JWT TOKEN AUTHENTICATION
 
-        $result = CommentServiceProvider::remove($comment_id);
+        // TODO: First param the user_id fully random for now, need to change with token authentication feature
+        $result = CommentServiceProvider::remove(1, $comment_id);
 
         return $result;
     }
