@@ -13,8 +13,6 @@ $router->group(['prefix' => 'user'], function () use ($router) {
 
     $router->group(['prefix' => '/{user_id}'], function() use ($router) {
         $router->get('/get', 'UserController@get');
-        $router->patch('/update-password', 'UserController@updatePassword');
-        $router->patch('/update-email', 'UserController@updateEmail');
         $router->delete('/delete', 'UserController@delete');
     });
 });
