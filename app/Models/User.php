@@ -38,7 +38,7 @@ class User extends Model
     {
         $user = new User();
         $user->name = $name;
-        $user->password = $password;
+        $user->password = Hash::make($password);
         $user->email = $email;
         $user->save();
 
