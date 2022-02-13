@@ -32,11 +32,9 @@ class UserController extends Controller
             'email' => 'required|email',
         ]);
 
-        $bodyContent = json_decode($request->getContent(), true);
-
-        $name = $bodyContent['name'];
-        $password = $bodyContent['password'];
-        $email = $bodyContent['email'];
+        $name = $request->input('name');
+        $password = $request->input('password');
+        $email = $request->input('email');
     
         $result = UserServiceProvider::create($name, $password, $email);
 
